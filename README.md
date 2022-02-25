@@ -3,7 +3,7 @@
 <p align="center">
     A multithreaded bruteforcer of argon2 hashes.
     <br>
-    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/p0dalirius/FindUncommonShares">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/p0dalirius/Argon2Cracker">
     <a href="https://twitter.com/intent/follow?screen_name=podalirius_" title="Follow"><img src="https://img.shields.io/twitter/follow/podalirius_?label=Podalirius&style=social"></a>
     <br>
 </p>
