@@ -15,9 +15,11 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 def get_ctx_from_hash(hash):
-    matched = re.search('\$(argon2(i|d|id))\$v=([0-9]+)\$([tpm=0-9,]+)\$([a-zA-Z0-9\+]+)\$([a-zA-Z0-9\+]+)', hash)
+    matched = re.search('\$(argon2(i|d|id))\$v=([0-9]+)\$([tpm=0-9,]+)\$([a-zA-Z0-9/\+]+)\$([a-zA-Z0-9/\+]+)', hash)
     if matched is not None:
         _, _, version, params, salt, hash = matched.groups()
+        if options.verbose:
+            print("Version: ",version,"\nParams: ",params,"\nSalt: ",salt,"\nHash: ",hash,"\n")
         params = {p.split('=')[0]: int(p.split('=')[1]) for p in params.split(',')}
         salt = base64.b64decode(salt+"==")
         hash = base64.b64decode(hash+"==")
