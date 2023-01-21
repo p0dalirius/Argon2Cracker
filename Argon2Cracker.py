@@ -15,8 +15,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 def get_ctx_from_hash(hash):
-    matched = re.search('\$(argon2(i|d|id))\$v=([0-9]+)\$([tpm=0-9,]+)\$([a-zA-Z0-9/\+]+)\$([a-zA-Z0-9/\+]+)', hash)
-    if matched is not None:
+    matched = re.search('^\$(argon2(i|d|id))\$v=([0-9]+)\$([tpm=0-9,]+)\$([a-zA-Z0-9/\+]+)\$([a-zA-Z0-9/\+]+)', hash)
+    if matched:
         _, _, version, params, salt, hash = matched.groups()
         if options.verbose:
             print("Version: ",version,"\nParams: ",params,"\nSalt: ",salt,"\nHash: ",hash,"\n")
@@ -25,8 +25,6 @@ def get_ctx_from_hash(hash):
         hash = base64.b64decode(hash+"==")
         ctx = argon2.PasswordHasher(time_cost=params['t'], memory_cost=params['m'], parallelism=params['p'], hash_len=len(hash), salt_len=len(salt))
         return ctx
-    else:
-        return None
 
 
 def worker(ctx, hash, candidate, monitor_data):
@@ -88,6 +86,9 @@ if __name__ == '__main__':
 
     ctx = get_ctx_from_hash(options.hash)
 
+    if not ctx:
+        print("[!] Could not parse argon2 hash.")
+        sys.exit(1)
     monitor_data = {"found": False, "tries": 0, "candidate": "", "total": len(wordlist)}
 
     # Waits for all the threads to be completed
