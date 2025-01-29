@@ -18,7 +18,7 @@
 
 ```
 $ ./Argon2Cracker.py -h
-Argon2Cracker - v1.0 - by @podalirius_
+Argon2Cracker - v1.0 - by Remi GASCOU (Podalirius)
 
 usage: Argon2Cracker.py [-h] [-t THREADS] -w WORDLIST [-v] hash
 

@@ -60,7 +60,7 @@ def monitor_thread(monitor_data):
         print("")
 
 def parseArgs():
-    print("Argon2Cracker - v1.0 - by @podalirius_\n")
+    print("Argon2Cracker - v1.0 - by Remi GASCOU (Podalirius)\n")
 
     parser = argparse.ArgumentParser(description="argon2 hash cracker")
     parser.add_argument("hash", default=None, help="argon2 hash")
